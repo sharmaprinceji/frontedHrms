@@ -36,7 +36,7 @@ It is built using React + Vite and deployed on Vercel.
 ---
 
 ##  Live Frontend URL
-https://fronted-hrms-ak5d1nfdx-prince-sharmas-projects-e46f4f1e.vercel.app/
+https://fronted-hrms.vercel.app/
 
 ## 1 .Clone the repository
 git clone https://github.com/sharmaprinceji/frontedHrms
