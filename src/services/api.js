@@ -34,3 +34,13 @@ export const getAttendance = async (id) => {
   const res = await fetch(`${API_BASE}/attendance/${id}/`);
   return res.json();
 };
+
+export const getDashboardCounts = async () => {
+  const res = await fetch(`${API_BASE}/dashboard/counts/`);
+  return res.json();
+};
+
+export const getRecentEmployees = async () => {
+  const res = await fetch(`${API_BASE}/employees/recent/`);
+  return res.json();
+};

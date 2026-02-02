@@ -52,8 +52,13 @@ button {
   color: white;
 }
 
-input, select {
-  width: 95%;
+input {
+  width: 92%;
   padding: 8px;
   margin: 6px 0;
+}
+select {
+   width: 100%;
+   padding: 8px;
+   margin: 6px 0;
 }

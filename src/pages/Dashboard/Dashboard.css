@@ -1,0 +1,106 @@
+
+.summary-card {
+  margin-bottom: 20px;
+}
+
+.summary-top {
+  text-align: center;
+}
+
+.summary-divider {
+  margin: 15px 0;
+  border: none;
+  border-top: 1px solid #ddd;
+}
+
+.summary-bottom {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .summary-bottom {
+    grid-template-columns: 1fr;
+  }
+}
+
+.summary-item {
+  padding: 10px;
+}
+
+.present {
+  border-left: 5px solid green;
+}
+
+.absent {
+  border-left: 5px solid red;
+}
+
+.stat-value {
+  font-size: 28px;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+
+.dashboard-table-wrapper {
+  margin-top: 15px;
+}
+
+.dashboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: transparent;
+}
+
+.dashboard-table th,
+.dashboard-table td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+  background: transparent;
+}
+
+
+.dashboard-table th {
+  background: rgba(0, 0, 0, 0.03);
+  font-weight: 600;
+}
+
+.dashboard-table tbody tr:nth-child(even) {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+
+.dashboard-table tbody tr:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+
+.present-text {
+  color: green;
+  font-weight: bold;
+}
+
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.pagination button {
+  padding: 6px 12px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  background: white;
+  cursor: pointer;
+}
+
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

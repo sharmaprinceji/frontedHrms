@@ -3,7 +3,7 @@ import { markAttendance, getAttendance } from "../../services/api";
 import Loader from "../../components/Loader";
 
 const MarkAttendance = () => {
-  const [mode, setMode] = useState("mark"); // "mark" or "view"
+  const [mode, setMode] = useState("mark"); 
 
   const [markForm, setMarkForm] = useState({
     employee_id: "",
@@ -78,10 +78,8 @@ const MarkAttendance = () => {
         return;
       }
 
-      // Success case
       setSuccess("Attendance marked successfully");
 
-      // Clear form
       setMarkForm({
         employee_id: "",
         date: "",
@@ -110,7 +108,9 @@ const MarkAttendance = () => {
       setError("Failed to fetch attendance records.");
       setRecords([]);
     } finally {
+     setTimeout(() => {
       setLoading(false);
+    }, 1000);
     }
   };
 
@@ -118,7 +118,7 @@ const MarkAttendance = () => {
     <div className="container">
       <h2>Attendance Management</h2>
 
-      {/* ===== TOGGLE BUTTONS ===== */}
+      
       <div style={{ marginBottom: "15px" }}>
         <button
           className={mode === "mark" ? "primary" : ""}
@@ -136,7 +136,6 @@ const MarkAttendance = () => {
         </button>
       </div>
 
-      {/* ===== MARK ATTENDANCE SECTION ===== */}
       {mode === "mark" && (
         <div className="card">
           <h3>Mark Attendance</h3>
@@ -170,12 +169,17 @@ const MarkAttendance = () => {
           </button>
         </div>
       )}
+      
 
-      {/* ===== VIEW ATTENDANCE SECTION ===== */}
+
       {mode === "view" && (
         <>
           <div className="card">
             <h3>View Attendance</h3>
+            
+            {loading && <Loader />}
+
+             {error && <p style={{ color: "red" }}>{error}</p>}
 
             <input
               placeholder="Enter Employee ID"
@@ -187,10 +191,6 @@ const MarkAttendance = () => {
               View Records
             </button>
           </div>
-
-          {loading && <Loader />}
-
-          {error && <p style={{ color: "red" }}>{error}</p>}
 
           {hasSearched && !loading && records.length === 0 && !error && (
             <p>No attendance records found for this employee.</p>

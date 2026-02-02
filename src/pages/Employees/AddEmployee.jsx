@@ -1,43 +1,3 @@
-// import { useState } from "react";
-// import { addEmployee } from "../../services/api";
-
-// const AddEmployee = () => {
-//   const [form, setForm] = useState({
-//     employee_id: "",
-//     full_name: "",
-//     email: "",
-//     department: "",
-//   });
-
-//   const handleChange = (e) => {
-//     setForm({ ...form, [e.target.name]: e.target.value });
-//   };
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     await addEmployee(form);
-//     alert("Employee added");
-//   };
-
-//   return (
-//     <div className="container">
-//       <h2>Add Employee</h2>
-//       <div className="card">
-//         <input name="employee_id" placeholder="Employee ID" onChange={handleChange} />
-//         <input name="full_name" placeholder="Full Name" onChange={handleChange} />
-//         <input name="email" placeholder="Email" onChange={handleChange} />
-//         <input name="department" placeholder="Department" onChange={handleChange} />
-
-//         <button className="primary" onClick={handleSubmit}>
-//           Add Employee
-//         </button>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default AddEmployee;
-
 import { useState, useEffect } from "react";
 import { addEmployee, getEmployees } from "../../services/api";
 
@@ -54,7 +14,7 @@ const AddEmployee = () => {
   const [success, setSuccess] = useState("");
 
   useEffect(() => {
-    // Load existing employees to check duplicates
+
     const loadEmployees = async () => {
       const data = await getEmployees();
       setEmployees(data);
@@ -78,9 +38,6 @@ const AddEmployee = () => {
     setError("");
     setSuccess("");
 
-    // ===== CLIENT-SIDE VALIDATIONS =====
-
-    // 1. Required fields
     if (
       !form.employee_id ||
       !form.full_name ||
@@ -91,13 +48,11 @@ const AddEmployee = () => {
       return;
     }
 
-    // 2. Email format validation
     if (!isValidEmail(form.email)) {
       setError("Please enter a valid email address.");
       return;
     }
 
-    // 3. Check duplicate Employee ID
     const duplicateId = employees.find(
       (emp) => emp.employee_id === form.employee_id
     );
@@ -107,7 +62,6 @@ const AddEmployee = () => {
       return;
     }
 
-    // 4. Check duplicate Email
     const duplicateEmail = employees.find(
       (emp) => emp.email === form.email
     );
@@ -121,15 +75,13 @@ const AddEmployee = () => {
       await addEmployee(form);
       setSuccess("Employee added successfully.");
 
-      // Clear form
       setForm({
         employee_id: "",
         full_name: "",
         email: "",
         department: "",
       });
-
-      // Refresh employee list for future validation
+      
       const updated = await getEmployees();
       setEmployees(updated);
     } catch (err) {
