@@ -19,6 +19,7 @@ body {
   margin: auto;
   /* margin-top: 40%; */
   text-align: center;
+  color: #cbdc35;
 
 }
 
@@ -29,7 +30,10 @@ body {
   border-radius: 8px;
   box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
   margin-bottom: 10px;
+  color: rgb(224, 79, 53);
 }
+
+
 
 button {
   padding: 8px 12px;

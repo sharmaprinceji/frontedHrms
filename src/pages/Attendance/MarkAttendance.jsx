@@ -15,7 +15,7 @@ const MarkAttendance = () => {
   const [records, setRecords] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [success,setSuccess] =useState("");
+  const [success, setSuccess] = useState("");
   const [hasSearched, setHasSearched] = useState(false);
 
   const isFutureDate = (selectedDate) => {
@@ -32,15 +32,15 @@ const MarkAttendance = () => {
 
   const handleMarkChange = (e) => {
     setMarkForm({ ...markForm, [e.target.name]: e.target.value });
-    setError(""); // clear error when user types
+    setError("");
   };
 
   const handleMarkSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    setSuccess("");
 
-    // ===== VALIDATIONS =====
-
+    // ===== LIGHT FRONTEND VALIDATIONS =====
     if (!markForm.date) {
       setError("Please select a date.");
       return;
@@ -57,7 +57,7 @@ const MarkAttendance = () => {
     }
 
     try {
-      // ===== NEW: Check if attendance already exists for same date =====
+      // (Optional UX check) — prevent duplicate before hitting backend
       const existingRecords = await getAttendance(markForm.employee_id);
 
       const alreadyMarked = existingRecords.some(
@@ -69,18 +69,29 @@ const MarkAttendance = () => {
         return;
       }
 
-      await markAttendance(markForm);
+      // ===== CALL BACKEND (MAIN VALIDATION HAPPENS HERE) =====
+      const res = await markAttendance(markForm);
+
+      // If backend returns error (including "Invalid employee ID")
+      if (res.error) {
+        setError(res.error); // <-- THIS WILL SHOW "Invalid employee ID"
+        return;
+      }
+
+      // Success case
       setSuccess("Attendance marked successfully");
 
+      // Clear form
       setMarkForm({
         employee_id: "",
         date: "",
         status: "Present",
       });
     } catch (err) {
-      setError("Failed to mark attendance. Please try again.");
+      setError("Failed to connect to server. Please try again.");
     }
   };
+
 
   const handleViewAttendance = async () => {
     if (!viewEmpId) {
@@ -129,8 +140,8 @@ const MarkAttendance = () => {
       {mode === "mark" && (
         <div className="card">
           <h3>Mark Attendance</h3>
-           {error && <p style={{ color: "red" }}>{error}</p>}
-           {success && <p style={{ color: "green" }}>{success}</p>}
+          {error && <p style={{ color: "red" }}>{error}</p>}
+          {success && <p style={{ color: "green" }}>{success}</p>}
           <input
             name="employee_id"
             placeholder="Employee ID"
