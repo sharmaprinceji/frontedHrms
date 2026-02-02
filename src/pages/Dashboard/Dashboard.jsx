@@ -22,15 +22,14 @@ const Dashboard = () => {
 
     try {
       const empData = await getDashboardCounts();
-      console.log("Dashboard Counts:", empData);
       setCounts(empData);
     } catch (err) {
       console.error("Failed to load dashboard data:", err);
     }
 
-      setTimeout(() => {
-      setLoading(false);
-    }, 1000);
+    setTimeout(() => {
+    setLoading(false);
+  }, 1000);
   };
 
   return (
