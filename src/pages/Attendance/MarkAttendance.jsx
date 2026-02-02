@@ -18,7 +18,6 @@ const MarkAttendance = () => {
   const [success,setSuccess] =useState("");
   const [hasSearched, setHasSearched] = useState(false);
 
-  // ===== HELPER: check future date =====
   const isFutureDate = (selectedDate) => {
     if (!selectedDate) return false;
 
@@ -70,12 +69,9 @@ const MarkAttendance = () => {
         return;
       }
 
-      // If not marked before, proceed
       await markAttendance(markForm);
       setSuccess("Attendance marked successfully");
-    //   alert("Attendance marked successfully");
 
-      // Clear form after success
       setMarkForm({
         employee_id: "",
         date: "",
